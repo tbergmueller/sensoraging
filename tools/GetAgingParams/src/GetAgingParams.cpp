@@ -29,10 +29,12 @@ cv::Mat calcPixelMean(const vector<cv::Mat>& inputImages)
 		{
 			for(int y=0; y<it->rows; y++)
 			{
-				mean.at<float>(y,x) += (float)(it->at<uchar>(y,x)) *fact ;
+				mean.at<float>(y,x) += (float)(it->at<uchar>(y,x));
 			}
 		}
 	}
+
+	mean = mean * fact;
 
 	return mean;
 }
@@ -69,21 +71,22 @@ Mat getDefectMat(const vector<Mat>& inputImages, Mat& oMean, int medianKernelSiz
 	oMean = mean;
 	Mat mean_illus(mean.size(), CV_8UC1);
 
-	for(int x=0; x<mean.cols; x++)
+	/*for(int x=0; x<mean.cols; x++)
 	{
 		for(int y=0; y<mean.rows; y++)
 		{
 			mean_illus.at<uchar>(y,x) = (uchar) mean.at<float>(y,x);
 		}
 	}
+	*/
 
 	//imshow("mean", mean_illus);
 	//waitKey();
 	Mat smoothed;
-	medianBlur(mean_illus, smoothed, medianKernelSize);
+	medianBlur(mean, smoothed, medianKernelSize);
 
 	Mat defects;
-	subtract(mean_illus,smoothed,defects);
+	subtract(mean,smoothed,defects);
 
 	return defects;
 
@@ -92,7 +95,7 @@ Mat getDefectMat(const vector<Mat>& inputImages, Mat& oMean, int medianKernelSiz
 
 
 
-#define NR_OF_FILES		2840
+#define NR_OF_FILES		4640
 #define MEDIAN_KERNEL_SIZE	3
 
 void writeImg(string prefix, string name, Mat& toWrite)
@@ -122,6 +125,70 @@ int countDefects(const Mat& defectLocationMat)
 	return cnt;
 }
 
+void refineLocations(const Mat& o_defects2009, const Mat& o_defects2013, Mat& o_defect_locations)
+{
+
+	double minVal;
+	double maxVal;
+	Point minLoc;
+	Point maxLoc;
+
+	int nrOfSteps = 255;
+
+	minMaxLoc( o_defects2009, &minVal, &maxVal, &minLoc, &maxLoc );
+
+	cout << "min 2009 is " << minVal << " and max is " << maxVal << endl;
+
+	double step2009 = maxVal / (double)nrOfSteps;
+
+	minMaxLoc( o_defects2013, &minVal, &maxVal, &minLoc, &maxLoc );
+	cout << "min 2013 is " << minVal << " and max is " << maxVal << endl;
+	double step2013 = maxVal / (double)nrOfSteps;
+
+
+	double thres_2009 = step2009;
+	double thres_2013 = step2013;
+	Mat loc09, loc13;
+
+	Mat curBest;
+	double curBestRatio = 0.0;
+
+
+	for(int i=0; i<nrOfSteps; i++)
+	{
+		threshold(o_defects2009,loc09,thres_2009, 255, CV_THRESH_BINARY);
+		threshold(o_defects2013,loc13,thres_2013, 255, CV_THRESH_BINARY);
+
+		thres_2009 += step2009;
+		thres_2013 += step2013;
+
+
+		Mat matching;
+
+		bitwise_and(loc09, loc13, matching);
+
+		int matchDefects = countDefects(matching);
+		int defects09 = countDefects(loc09);
+		int defects13 = countDefects(loc13);
+
+		double ratio = (double)matchDefects / (double) MAX(defects09,defects13);
+
+		cout << "thres=" << i << "\t2009: " << defects09 << "\t 2013: " << defects13 << "\t matching: " << matchDefects << endl;
+
+
+		if(ratio > curBestRatio)
+		{
+			curBestRatio = ratio;
+			curBest = matching.clone();
+		}
+
+	}
+
+
+
+
+}
+
 
 void processInputs(vector<Mat>& inputs, string file_prefix, Mat& o_defects, Mat& o_defect_locations, Mat& oMean)
 {
@@ -129,17 +196,23 @@ void processInputs(vector<Mat>& inputs, string file_prefix, Mat& o_defects, Mat&
 
 	o_defects = getDefectMat(inputs, oMean, MEDIAN_KERNEL_SIZE);
 
+	writeImg(file_prefix, "meanImage", oMean);
+
 	Mat d; // defect working mat for classification
-	normalize(o_defects,d,0,255, NORM_MINMAX, CV_8UC1);
+	d = o_defects.clone();
+
+	rectangle(d,Point(0,0), Point(d.cols-1, 20),Scalar::all(0),CV_FILLED);
+	rectangle(d,Point(100,50), Point(d.cols-100, d.rows-50),Scalar::all(0),CV_FILLED);
+
+	normalize(d,d,0,255, NORM_MINMAX, CV_8UC1);
 	writeImg(file_prefix, "defects_with_correlated_data",d);
 
 	// Do classification by thresholding, FIXME: Hardcoded parameters
-	threshold(d,d,65,255,CV_THRESH_BINARY);
+	threshold(d,d,200,255,CV_THRESH_BINARY);
 	writeImg(file_prefix, "defects_classified_with_correlated_data",d);
 
 	// Remove correlated region (replace with black)
-	rectangle(d,Point(0,0), Point(d.cols-1, 50),Scalar::all(0),CV_FILLED);
-	rectangle(d,Point(100,50), Point(d.cols-100, d.rows-50),Scalar::all(0),CV_FILLED);
+
 	writeImg(file_prefix, "defects_classified",d);
 
 
@@ -202,11 +275,15 @@ int main()
 	Mat matches;
 
 
-	loadBitmaps("/home/tbergmueller/bs/2009/img", NR_OF_FILES, inputs);
+	loadBitmaps("/var/run/media/tbergmueller/WD 1TB/iris/aged/2009/h100/", NR_OF_FILES, inputs);
 	processInputs(inputs,"img/2009",defects_2009, defect_loc_2009, mean_2009);
 
-	loadBitmaps("/home/tbergmueller/bs/2013/img", NR_OF_FILES, inputs);
+
+	loadBitmaps("/var/run/media/tbergmueller/WD 1TB/iris/aged/2013/h100/", NR_OF_FILES, inputs);
 	processInputs(inputs,"img/2013",defects_2013, defect_loc_2013, mean_2013);
+
+
+	refineLocations(defects_2009, defects_2013, defect_loc_2013);
 
 	bitwise_and(defect_loc_2009, defect_loc_2013, matches);
 

@@ -263,14 +263,14 @@ d = \frac{1}{K}\sum\limits_{k=1}^{K}y_k - med(\bar{y},q)
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{img/correlated.png}
-\caption{The mean image of $Y_1 \dots Y_k$ has correlated data in the image's centre because of the iris usually being there. In the outer regions (marked), in almost all images skin and eyeball is captured in these regions, which tend to have unified brightness levels and little texture. TODO: Actual image}
+\caption{The mean image of $Y_1 \dots Y_k$ has correlated data in the image's centre because of the iris usually being there. In the outer regions (marked), in almost all images skin and eyeball is captured in these regions, which tend to have unified brightness levels and little texture.}
 \label{fig:correlated}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{img/correlated.png}
-\caption{Correctly classified pixel defects from $T_1$ are contained in $T_2$ as well. All other detected defects in $T_1$ can be interpreted as misclassification, since they violate the \emph{once defective, always defective}-condition. TODO: Actual image}
+\caption{Correctly classified pixel defects from $T_1$ are contained in $T_2$ as well. All other detected defects in $T_1$ can be interpreted as misclassification, since they violate the \emph{once defective, always defective}-condition}
 \label{fig:defectPersistence}
 \end{figure}
 We declare a pixel to be partially stuck if $d$ exceeds a certain threshold $d > \tau_{ps}$. Since there is no reasonable way to find an optimal value for $\tau_{ps}$, we exploit the \emph{once defective, always defective}-property. We know that a sensor's partially stuck pixels from $T_1$ also have to be present (along with others) in $T_2$. This is illustrated in fig. \ref{fig:defectPersistence}. The number of defects $n_{match}$, which are present at the same location $s_k$ in the images captured at $T_1$ and $T_2$ can be determined. Considering the number of defects $n_1$ in the image captured at $T_1$, the correctness ratio $s$ of the algorithm can be defined as
@@ -280,24 +280,27 @@ s = \frac{n_{match}}{n_1}
 
 
 
-Assuming that for $T_1$ and $T_2$ the same error is made, the observed increase of defects can be corrected by this factor $s$. Taking into account the size of the sensor $w\cdot h$, we retrieve the simulation parameters as defined in tbl. \ref{table:parameters}.
+Assuming that for $T_1$ and $T_2$ the same error is made, the observed increase of defects can be corrected by this factor $s$. Taking into account the size of the sensor $w\cdot h$, we retrieve the simulation parameters as defined in tbl. \ref{tab:parameters}.
 
-\begin{table} 
-  \begin{tabular}{l l l }
-  Param & Formula & from \cite{agedIris} \\
-  \hline 
-  $\lambda_{ps}$ & $s \cdot \frac{n_2-n_1}{(T_2-T_1)*(w \cdot h)}$ & $\lambda_{h100}={1234}\frac{1}{1000 \text{px} \cdot \text{year}}$ \\ 
-  $\lambda_{s}$ & $s \cdot \frac{n_{s2}-n_{s1}}{(T_2-T_1)*(w \cdot h)}$ & $\lambda_{s} = 0$ \\
-  $ a_{ps}$ & $max(D)$ & $a_{ps_{h100}} = 3$ \\
-  $ a_{s}$ & $a_s := 255$ & $a_{s} = 255$ 
-  \end{tabular}
-  \label{table:parameters}
-  \vspace{2mm}
-  \caption{Simulation parameters}
+\begin{table}
+ 
+\begin{tabular}{l l l }
+Param & Formula & from \cite{agedIris} \\
+\hline 
+$\lambda_{ps}$ & $s \cdot \frac{n_2-n_1}{(T_2-T_1)*(w \cdot h)}$ & $\lambda_{h100}={1234}\frac{1}{1000 \text{px} \cdot \text{year}}$ \\ 
+$\lambda_{s}$ & $s \cdot \frac{n_{s2}-n_{s1}}{(T_2-T_1)*(w \cdot h)}$ & $\lambda_{s} = 0$ \\
+$ a_{ps}$ & $max(D)$ & $a_{ps_{h100}} = 3$ \\
+$ a_{s}$ & $a_s := 255$ & $a_{s} = 255$ 
+\end{tabular}
+\label{tab:parameters}
+\vspace{2mm}
+\caption{Simulation parameters}
 \end{table}
 
 
-The retrieved values seem to correspond with the findings of other researchers, such as in \cite{defectDetection, leung}. Dudas suggests in \cite{inFieldDefects} that real stuck pixels are never detected in field, because they are easy to detect at fabrication time and get corrected or may correspond to partially stuck pixels with extremely high offset. However, we modelled actual stuck pixels at a moderate growth rate (refer table. \ref{table:tests}) to investigate what happens if stuck pixels should occur. Furthermore, we modelled other sensors with growth rates retrieved from literature and pushed the aging parameters to mutiples of the real values.
+The retrieved values seem to correspond with the findings of other researchers, such as in \cite{defectDetection, leung}. Dudas \emph{et al} suggests in \cite{inFieldDefects} that real stuck pixels are never detected in field, because they are easy to detect at fabrication time (if any) or may correspond to partially stuck pixels with extremely high offset. However, we modelled real stuck pixels at a moderate growth rate (refer tab. \ref{tab:tests}) to investigate the influence if it happens stuck pixels occur. Furthermore, we modelled other sensors with growth rates retrieved from literature.
+
+
 
 
  \section{Testing}
@@ -314,27 +317,22 @@ The retrieved values seem to correspond with the findings of other researchers, 
  \end{itemize}
 
  
- \begin{table} 
  
-  \begin{tabular}{c | c c c }
-  Sensor & $\lambda_{ps}$ & $\lambda_{s}$ & $a_{ps}$  \\
-  \hline
-  A	&	$\lambda_{h100}$ & 0 & $a_{ps_{h100}}$ \\
-  B	&	$\lambda_{oki}$	& 0	& $a_{ps_{oki}}$   \\
-  C & $\lambda_{h100}$ & $\lambda_{APS}$ & $a_{ps_{h100}}$ \\
-  D & $\lambda_{oki}$ & $\lambda_{APS}$ & $a_{ps_{oki}}$    \\
-  E & $\lambda_{APS}$ & 0 & $a_{ps_{h100}}$    \\
-  F & $\lambda_{CCD}$ & 0 & $a_{ps_{h100}}$   \\
-  G & 0 & $\lambda_{APS}$ & -- \\
-  H & $ 4 \lambda_{h100}$ & 0 & $ 2 a_{ps_{h100}}$ \\
-  I & $ 4 \lambda_{h100}$ & 0 & 100 \\
-  J & $ 8 \lambda_{h100}$ &  $ 5 \lambda_{APS}$ & 100
-
-  \end{tabular}
-    \label{table:tests}
-    \vspace{2mm}
-    \caption{Artificial sensors with their aging parameters}
- \end{table}
+ \begin{tabular}{c | c c c }
+ Sensor & $\lambda_{ps}$ & $\lambda_{s}$ & $a_{ps}$  \\
+ \hline
+ A	&	$\lambda_{h100}$ & 0 & $a_{ps_{h100}}$ \\
+ B	&	$\lambda_{oki}$	& 0	& $a_{ps_{oki}}$   \\
+ C & $\lambda_{h100}$ & $\lambda_{APS}$ & $a_{ps_{h100}}$ \\
+ D & $\lambda_{oki}$ & $\lambda_{APS}$ & $a_{ps_{oki}}$    \\
+ E & $\lambda_{APS}$ & 0 & $a_{ps_{h100}}$    \\
+ F & $\lambda_{CCD}$ & 0 & $a_{ps_{h100}}$   \\
+ G & 0 & $\lambda_{APS}$ & -- \\
+ H & $ 4 \lambda_{h100}$ & 0 & $ 2 a_{ps_{h100}}$ \\
+ I & $ 4 \lambda_{h100}$ & 0 & 100 \\
+ J & $ 8 \lambda_{h100}$ &  $ 5 \lambda_{APS}$ & 100
+ \label{tab:tests}
+ \end{tabular}
  
  
  
@@ -384,8 +382,5 @@ The retrieved values seem to correspond with the findings of other researchers, 
 \bibliographystyle{ieee}
 \bibliography{egbib}
 }
-
-% TODO: Table referencing does not work!!
-% TODO: Figure 2 enhance
 
 \end{document}

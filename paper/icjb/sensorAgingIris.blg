@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/TeX Live for SUSE Linux)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: sensorAgingIris.aux
+The style file: ieee.bst
+Database file #1: egbib.bib
+Warning--empty year in defectDetection
+Warning--empty year in defectIdentification
+Warning--empty institution in grotherStability
+You've used 23 entries,
+            2120 wiz_defined-function locations,
+            640 strings with 7132 characters,
+and the built_in function-call counts, 6624 in all, are:
+= -- 621
+> -- 311
+< -- 1
++ -- 123
+- -- 100
+* -- 427
+:= -- 1137
+add.period$ -- 67
+call.type$ -- 23
+change.case$ -- 116
+chr.to.int$ -- 0
+cite$ -- 26
+duplicate$ -- 257
+empty$ -- 560
+format.name$ -- 100
+if$ -- 1377
+int.to.chr$ -- 0
+int.to.str$ -- 23
+missing$ -- 20
+newline$ -- 115
+num.names$ -- 48
+pop$ -- 154
+preamble$ -- 1
+purify$ -- 95
+quote$ -- 0
+skip$ -- 170
+stack$ -- 0
+substring$ -- 306
+swap$ -- 32
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 84
+warning$ -- 3
+while$ -- 60
+width$ -- 25
+write$ -- 241
+(There were 3 warnings)

@@ -58,6 +58,28 @@ public class EERCalculator {
 		_labelInTarget = caption;
 	}
 	
+	
+	private boolean isEyeA(String fName)
+	{
+		return fName.split("_")[0].split("-")[1].equals("A");
+	}
+	
+	private int getSampleNr(String fName)
+	{
+		
+		String[] parts = fName.split("_");
+		parts = parts[1].split("\\.");
+		
+		return Integer.parseInt(parts[0]);
+	}
+	
+	private boolean sameClass(String f1, String f2)
+	{
+		boolean isMatch = f1.split(FNAME_SEPARATOR)[0].equals(f2.split(FNAME_SEPARATOR)[0]);
+		return isMatch;
+	}
+	
+	
 	public void calc() throws IOException
 	{
 		// Determines the location 
@@ -78,6 +100,20 @@ public class EERCalculator {
 			//System.out.println(line);
 			String[] parts = line.split(SEPARATOR);
 			
+			// files
+			String f1 = parts[0];
+			String f2 = parts[1];
+			
+			
+			// check eye
+			// only consider Eye B
+			//if((!isEyeA(f1) && !isEyeA(f2)))
+				//continue;
+			
+			
+			
+			
+			
 			int idx = (int)(Double.parseDouble(parts[2]) / COURSE_STEP);
 			
 			// Clip at the top and bottom... seldom events anyway ;)
@@ -92,12 +128,12 @@ public class EERCalculator {
 			}
 			
 			// correct for self matches
-			if(parts[0].equals(parts[1]))
+			if(f1.equals(f2))
 			{
 				continue;
 			}
 			
-			boolean isMatch = parts[0].split(FNAME_SEPARATOR)[0].equals(parts[1].split(FNAME_SEPARATOR)[0]);
+			boolean isMatch = sameClass(f1, f2);
 			if(isMatch)
 			{
 				_trueMatchCnt++;
@@ -105,6 +141,31 @@ public class EERCalculator {
 			}
 			else
 			{
+				
+				// Code to decrease number of postors
+				int[] allowedSamples = {1,6};
+				// only consider one image from right and left eye
+				// but just in case of mismatch
+				
+			
+				boolean isValid = false;
+				
+				for(int i:allowedSamples)
+				{
+					isValid = isValid || (getSampleNr(f1)==i);
+					isValid = isValid || (getSampleNr(f2)==i);
+				}
+				
+				isValid = isValid && ((!isEyeA(f1) && !isEyeA(f2)));
+				//isValid = true;
+				if(!isValid)
+				{
+					continue;
+				}
+				
+				
+				
+				
 				_trueRejectCnt++;
 				_course_mismatches[idx]++;
 			}
@@ -115,7 +176,7 @@ public class EERCalculator {
 					
 		reader.close();
 		System.out.println("Data in memory...");
-		
+		System.out.println("Genuine: " + _trueMatchCnt + " and Postors: " + _trueRejectCnt);
 		
 		
 		// normalize course

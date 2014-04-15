@@ -6,45 +6,45 @@ Database file #1: egbib.bib
 Warning--empty year in defectDetection
 Warning--empty year in defectIdentification
 Warning--empty institution in grotherStability
-You've used 23 entries,
+You've used 29 entries,
             2120 wiz_defined-function locations,
-            640 strings with 7132 characters,
-and the built_in function-call counts, 6624 in all, are:
-= -- 621
-> -- 311
-< -- 1
-+ -- 123
-- -- 100
-* -- 427
-:= -- 1137
-add.period$ -- 67
-call.type$ -- 23
-change.case$ -- 116
+            680 strings with 8022 characters,
+and the built_in function-call counts, 9127 in all, are:
+= -- 864
+> -- 415
+< -- 5
++ -- 163
+- -- 133
+* -- 613
+:= -- 1517
+add.period$ -- 86
+call.type$ -- 29
+change.case$ -- 149
 chr.to.int$ -- 0
-cite$ -- 26
-duplicate$ -- 257
-empty$ -- 560
-format.name$ -- 100
-if$ -- 1377
+cite$ -- 32
+duplicate$ -- 361
+empty$ -- 768
+format.name$ -- 133
+if$ -- 1935
 int.to.chr$ -- 0
-int.to.str$ -- 23
-missing$ -- 20
-newline$ -- 115
-num.names$ -- 48
-pop$ -- 154
+int.to.str$ -- 29
+missing$ -- 26
+newline$ -- 145
+num.names$ -- 62
+pop$ -- 189
 preamble$ -- 1
-purify$ -- 95
+purify$ -- 122
 quote$ -- 0
-skip$ -- 170
+skip$ -- 253
 stack$ -- 0
-substring$ -- 306
-swap$ -- 32
-text.length$ -- 1
+substring$ -- 490
+swap$ -- 69
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 84
+type$ -- 108
 warning$ -- 3
-while$ -- 60
-width$ -- 25
-write$ -- 241
+while$ -- 82
+width$ -- 31
+write$ -- 309
 (There were 3 warnings)

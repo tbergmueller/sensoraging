@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.4.7)  14 APR 2014 17:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/TeX Live for SUSE Linux) (format=pdflatex 2014.4.7)  16 APR 2014 01:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -317,13 +317,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 65.
 (/usr/share/texmf/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 65.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 69.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 87.
 
 (/usr/share/texmf/tex/latex/psnfss/ot1phv.fd
@@ -335,99 +335,96 @@ File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 File: img/defects.png Graphic file (type png)
 
 <use img/defects.png>
-Package pdftex.def Info: img/defects.png used on input line 99.
+Package pdftex.def Info: img/defects.png used on input line 100.
 (pdftex.def)             Requested size: 237.13594pt x 177.8515pt.
  <img/defectLocations.png, id=13, 2053.6725pt x 521.95pt>
 File: img/defectLocations.png Graphic file (type png)
 
 <use img/defectLocations.png>
-Package pdftex.def Info: img/defectLocations.png used on input line 108.
+Package pdftex.def Info: img/defectLocations.png used on input line 109.
 (pdftex.def)             Requested size: 237.13594pt x 60.26588pt.
  [2 <./img/defects.png> <./img/defectLocations.png>] [3]
-Underfull \hbox (badness 1314) in paragraph at lines 229--233
+Underfull \hbox (badness 1314) in paragraph at lines 230--231
 \OT1/ptm/m/n/10 laboratory-captured data set avail-able for iris im-agers.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 229--233
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 234.
-
-(/usr/share/texmf/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 234.
- [4]
-<img/correlated.png, id=35, 481.8pt x 361.35pt>
-File: img/correlated.png Graphic file (type png)
- <use img/correlated.png>
-Package pdftex.def Info: img/correlated.png used on input line 265.
-(pdftex.def)             Requested size: 237.13594pt x 177.85152pt.
+[4] <img/correlated.png, id=35, 1039.885pt x 395.4775pt>
 File: img/correlated.png Graphic file (type png)
 
 <use img/correlated.png>
-Package pdftex.def Info: img/correlated.png used on input line 272.
-(pdftex.def)             Requested size: 237.13594pt x 177.85152pt.
- [5 <./img/correlated.png>]
-<img/sensor1.png, id=42, 971.12813pt x 511.9125pt>
+Package pdftex.def Info: img/correlated.png used on input line 258.
+(pdftex.def)             Requested size: 237.13594pt x 90.18549pt.
+
+<img/defectMatWithTau.png, id=36, 1273.75874pt x 528.97626pt>
+File: img/defectMatWithTau.png Graphic file (type png)
+
+<use img/defectMatWithTau.png>
+Package pdftex.def Info: img/defectMatWithTau.png used on input line 267.
+(pdftex.def)             Requested size: 237.13594pt x 98.4725pt.
+
+<img/detectedLocations.png, id=37, 1957.3125pt x 562.1pt>
+File: img/detectedLocations.png Graphic file (type png)
+
+<use img/detectedLocations.png>
+Package pdftex.def Info: img/detectedLocations.png used on input line 282.
+(pdftex.def)             Requested size: 237.13594pt x 68.10094pt.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 304.
+
+ (/usr/share/texmf/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 304.
+
+[5 <./img/correlated.png> <./img/defectMatWithTau.png> <./img/detectedLocations
+.png>] <img/sensor1.png, id=47, 953.06062pt x 513.41812pt>
 File: img/sensor1.png Graphic file (type png)
- <use img/sensor1.png>
-Package pdftex.def Info: img/sensor1.png used on input line 360.
-(pdftex.def)             Requested size: 237.13594pt x 125.00175pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
-[]\OT1/ptm/m/n/10 Also no true stuck pixel
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 377--378
-\OT1/ptm/m/n/10 http://euler.ecs.umass.edu/research/ctkk-spie-
- []
-
-(./sensorAgingIris.bbl
+<use img/sensor1.png>
+Package pdftex.def Info: img/sensor1.png used on input line 370.
+(pdftex.def)             Requested size: 237.13594pt x 127.74315pt.
+ [6 <./img/sensor1.png>] (./sensorAgingIris.bbl
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
-LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 86.
- [6 <./img/sensor1.png>]
-Underfull \hbox (badness 1077) in paragraph at lines 93--97
+
+Underfull \hbox (badness 1077) in paragraph at lines 113--117
 []\OT1/ptm/m/n/9 D. M. Monro, S. Rak-shit, and D. Zhang.  Dct-based
  []
 
-) [7
-
-] (./sensorAgingIris.aux) ) 
+) [7] (./sensorAgingIris.aux) ) 
 Here is how much of TeX's memory you used:
- 4072 strings out of 493315
- 55097 string characters out of 6145897
- 131897 words of memory out of 5000000
- 7409 multiletter control sequences out of 15000+600000
- 37192 words of font info for 83 fonts, out of 8000000 for 9000
+ 4083 strings out of 493315
+ 55326 string characters out of 6145897
+ 132944 words of memory out of 5000000
+ 7418 multiletter control sequences out of 15000+600000
+ 35128 words of font info for 76 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 38i,18n,26p,1258b,385s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</usr/
-share/texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf/fonts/t
-ype1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/amsfont
-s/cm/cmmi5.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr
-/share/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fonts/t
-ype1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/public/amsfonts
-/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/s
-hare/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/type
-1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/
-cmsy10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/sha
-re/texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts
-/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf/fonts/type1/urw/helvetic/uhvr8
-a.pfb></usr/share/texmf/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf/font
-s/type1/urw/times/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmri8a.pf
-b>
-Output written on sensorAgingIris.pdf (7 pages, 482184 bytes).
+ 38i,18n,26p,1547b,299s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/base/8r.enc}</
+usr/share/texmf/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf/fon
+ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf/fonts/type1/public/ams
+fonts/cm/cmmi5.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
+/usr/share/texmf/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf/fon
+ts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texmf/fonts/type1/public/amsf
+onts/cm/cmr10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmr5.pfb></u
+sr/share/texmf/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf/fonts/
+type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb></usr/share/texmf/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr
+/share/texmf/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/f
+onts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf/fonts/type1/urw/helvetic/u
+hvr8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf/
+fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on sensorAgingIris.pdf (7 pages, 682487 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
+ 113 PDF objects out of 1000 (max. 8388607)
  74 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 

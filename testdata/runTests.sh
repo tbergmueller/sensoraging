@@ -1,2 +1,0 @@
-./irisSegmentation.sh
-./irisCodeGeneration.sh

@@ -22,9 +22,7 @@
 \providecommand{\myfloor}[1]{\left \lfloor #1 \right \rfloor }
 
 
-
-
-
+\providecommand{\etal}[0]{\textit{et al.} }
 
 
 % Include other packages here, before hyperref.
@@ -77,16 +75,15 @@ First line of institution2 address\\
 \section{Introduction}
 % TODO probably start with a quote
 The aging process starts immediately after being given birth. At first, aging's aspects are considered to be rather positive. One grows up, gets stronger and learns new things. At a certain point, aging starts to reveal several drawbacks. The skin gets wrinkled, joints and bones start to ache and also our vision starts to degenerate. In either case, aging changes parts of our body. Although human beings change, others are still able to recognize people they knew before, even when they haven't met in a long time and therefore aging changed their appearance significantly.
-Biometric systems aim to identify human beings by analysing their biometric samples, i.e. the face, the fingerprints or iris \cite{rathgeb}. These systems operate in two steps. In the enrollment process, a subject's biometric samples are registered for the first time and stored in a database. Later, in the authentication procedure, another sample of a subject's biometric samples is taken and compared to the one stored in the database to verify the subject's identity. \\
-Since there may be years or decades between the enrollment and the authentication, one strives to use biometric samples which are stable over time. The iris has widely been assumed to be stable, although it is currently topic of intensive discussion if and which iris-related information eventually changes in a human's aging process. Some researchers claim that iris-related information is stable or relatively stable \cite{daugmanPatent, daugmanNoChange, grotherStability, monroDCTIris}, while others observe significant changes over time \cite{rankinChange, rankinChangeResponse, fenkerIrisAging, czajkaTemplateAging, fairhurstNonstability}. Researchers mostly conclude these age-dependent changes in iris texture by observing changes in a system's iris-recognition rate. It is not clear, if observed changes in an algorithms' behaviour are caused by the aging of the tested subject, which is commonly assumed, aging of the recognition system itself or if this is caused by other unspecified factors.
+Biometric systems aim to identify human beings by analysing their biometric samples, i.e. the face, the fingerprints or iris \cite{rathgeb}. These systems operate in two steps. In the enrollment process, a subject's biometric samples are registered for the first time and stored in a database. Later, in the authentication procedure, another sample of a subject's biometric samples is taken and compared to the one stored in the database to verify the subject's identity. Since there may be years or decades between the enrollment and the authentication, one strives to use biometric samples which are stable over time. The iris has been assumed to be stable, although it is currently topic of intensive discussion if and which iris-related information eventually changes in a human's aging process. Some researchers claim that iris-related information is stable or relatively stable \cite{daugmanNoChange, Monro}, while others observe significant changes over time \cite{rankinChange, rankinChangeResponse, fenkerIrisAging, czajkaTemplateAging, fairhurstNonstability}. Researchers mostly conclude these age-dependent changes in iris texture by observing changes in a system's iris-recognition rate. It is not clear, if observed changes in an algorithms' behaviour are caused by the aging of the tested subject, which is commonly assumed, aging of the recognition system itself or if this is caused by other unspecified factors.
 
-This paper proposes a method to investitage the influence of aging effects of digital image sensors, which are crucial components of the recognition system. As a human being's vision often gets weaker with age, pixels start to get defective in image sensors over the years as well. This influences the quality - and therefore the appearance - of the captured images. Similar to being able to estimate a human being's age by their appearance, pixel defects observed in the captured images can reveal the age of the corresponding imager. This is used in image forensics to approximate the capturing date of an image \cite{fridrich}. However, since the aging effects of the sensor can be traced by evaluation of its output, namely the images, this implies that the capturing process is not time invariant. Hence two images, which capture the same (unchanged) scene, but were taken at significantly different points in time, may differ due to developed sensor defects in the meantime.
+This paper proposes a method to investitage the impact of aging effects of digital image sensors, which are crucial components of the recognition system. As a human being's vision often gets weaker with age, pixels start to get defective in image sensors over the years as well. This influences the quality - and therefore the appearance - of the captured images. Similar to being able to estimate a human being's age by their appearance, pixel defects observed in the captured images can reveal the age of the corresponding imager. This is used in image forensics to approximate the capturing date of an image \cite{fridrich}. However, since the aging effects of the sensor can be traced by evaluation of its output, namely the images, this implies that the capturing process is not time invariant. Hence two images, which capture the same (unchanged) scene, but were taken at significantly different points in time, may differ due to developed sensor defects in the meantime.
 
 % TODO rephrase
-There might arise problems due to sensor aging, because iris recognition systems operate by comparing current samples to earlier taken ones stored in a database. Special cameras with digital image sensors are commonly used to capture the iris features in both cases, the enrollment and the authentication process. It is not clear yet, whether the aging of the sensor - and thus the development of aging effects between taking two samples - influence the accuracy of iris recognition algorithms. To investigate this issue, one would need to have identical data captured at at least two significantly different points in time. It is practically impossible to establish identical conditions for both shots. Furthermore, as mentioned, it is not possible to distinguish between the influence of the subject's and the sensor's aging on iris recognition algorithms. For this reason one cannot capture test data to investigate the sensor's or the subject's aging in an isolated manner physically. There is no way to explicitely examine the iris texture's aging at all. However, it is possible to investigate the sensor aging's influence on the iris recognition rate independent from the subject's aging.
+Special cameras with digital image sensors are used to capture the iris features in the enrollment and the authentication process. It is not clear yet, whether the aging of the sensor - and thus the development of aging effects between taking two samples - influences the accuracy of iris recognition algorithms. To investigate this issue, one would need to have identical data captured at at least two significantly different points in time. It is practically impossible to establish identical conditions for both shots. Furthermore, as mentioned, it is not possible to distinguish between the influence of the subject's and the sensor's aging on iris recognition algorithms. For this reason one cannot capture test data to investigate the sensor's or the subject's aging in an isolated manner physically. There is no way to explicitely examine the iris texture's aging at all. However, it is possible to investigate the sensor aging's influence on the iris recognition rate independent from the subject's aging.
 
 %TODO Check Notredame for one sensor only
-We proposes a method to investigate the impact sensors aging on the iris recognition rate. This is done by generating simulatively aged test data, which contains sensor aging related defects, based on an uncompressed iris database \cite{iitd} (see section \ref{virtualAging}). The practical relevance of the simulation is ensured by estimating parameters from an iris databases (section \ref{hotPixelRate}), where the same subjects were captured by the same sensor in 2009 and 2013 (section \ref{testing}). This test data set is used to test six implementations of iris recognition algorithms available in the University of Salzburg Iris Toolkit (USIT) \cite{usit}. By observing changes in the EER for certain algorithms, we conclude on the impact of sensor aging on iris recognition systems in section \ref{conclusion}.
+We proposes a method to investigate the impact sensors aging on the iris recognition rate. This is done by generating simulatively aged test data, which contains sensor aging related defects, based on an uncompressed iris database (see section \ref{virtualAging}). The practical relevance of the simulation is ensured by estimating parameters from an iris databases (section \ref{hotPixelRate}), where the same subjects were captured by the same sensor in 2009 and 2013 (section \ref{testing}). This test data set is used to test six implementations of iris recognition algorithms available in the University of Salzburg Iris Toolkit (USIT, http://www.wavelab.at). By observing changes in the EER for certain algorithms, we conclude on the impact of sensor aging on iris recognition systems in section \ref{conclusion}.
 
 
 \section{Sensor aging and pixel model}
@@ -101,14 +98,7 @@ Related work shows that such pixel defects caused by aging are uniformly distrib
 \label{fig:hotStuck}
 \end{figure}
 
-The most common defects occuring over time are partially and fully stuck pixels, illustrated in fig. \ref{fig:hotStuck}. Partially-stuck pixels tend to have a moderate, but still respond to the incident light. Stuck pixels produce a completely light-independent output value and are often (but necessarily) saturated \cite{fridrich}. As soon as a pixel is defective, it remains defective over the rest of the sensor's lifetime \cite{failureSemi}, regardless which type of defect it suffers from. So one can obtain the important property that if a pixel is \emph{once defective, it remains defective}. This is shown in fig. \ref{fig:defectLocations}.
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{img/defectLocations.png}
-\caption{Illustration of uniformly distributed and independent locations of partially-stuck (circle) and stuck (filled circle) pixels in images taken at 3 significantly different points in time T1, T2, T3.}
-\label{fig:defectLocations}
-\end{figure}
+The most common defects occuring over time are partially and fully stuck pixels, illustrated in fig. \ref{fig:hotStuck}. Partially-stuck pixels tend to have a moderate, but still respond to the incident light. Stuck pixels produce a completely light-independent output value and are often (but necessarily) saturated \cite{fridrich}. As soon as a pixel is defective, it remains defective over the rest of the sensor's lifetime \cite{failureSemi}, regardless which type of defect it suffers from. So one can obtain the important property that if a pixel is \emph{once defective, it remains defective}.
 
 The occurrence of new pixel defects can be modelled as a poisson process, because the number of pixel defects is increasing linear with time. Defect locations are uniformly distributed and independent. Already known defects remain constant in respect to their location and type \cite{fridrich, defectIdentification}. 
 To run a simulation, a model for calculating the pixel values of an image $y$ has to be defined. There are several pixel output models around, which consider the incoming light and the impact of pixel defects on the raw output of a sensor. We denote $w,h \in \mathbb{Z}$ as the rows and columns of the sensor and start by adopting the model proposed in \cite{fridrich}:
@@ -120,7 +110,8 @@ To run a simulation, a model for calculating the pixel values of an image $y$ ha
   \label{equ:pixelmodel}
  \end{equation}
 
-where $Y$ is the sensor output, commonly denoted as image, $I$ the intensity of incoming light, $I \circ K$ the photo-response non-uniformity PRNU, $\tau D$ the dark current (with $\tau$ being a multiplicative-factor representing exposure settings, sensor temperature, \dots), $C$ a light-independent offset and $\Theta$ some modeling noise. Since all pixels are independent \cite{fridrich, defectDetection} and all operations element-wise, we denote the matrix-elements $y_{x,y} \in Y$ as $ y \in Y$ for simplicity reasons. The same applies to $i \in I$, $k \in K$, $d \in D$, $c \in C$ and $\theta \in \Theta$.\\
+where $Y$ is the sensor output, commonly denoted as image, $I$ the intensity of incoming light, $I \circ K$ the photo-response non-uniformity PRNU, $\tau D$ the dark current (with $\tau$ being a multiplicative-factor representing exposure settings, sensor temperature, \dots), $C$ a light-independent offset and $\Theta$ some modeling noise. Since all pixels are independent \cite{fridrich, defectDetection} and all operations element-wise, we denote the matrix-elements $y_{x,y} \in Y$ as $ y \in Y$ for simplicity reasons. The same applies to $i \in I$, $k \in K$, $d \in D$, $c \in C$ and $\theta \in \Theta$.
+
 Since we're interested in simulating the aging effects of a specific sensor, all age-independent defects, which are e.g. due to production process, can be eliminated. Hence the PRNU, which corresponds to the non-uniformity of pixel-dimensions, can be omitted. As we're interested in reproducable tests, this means environmental influence (e.g. temperature) and modelling noise should be minimized. They can be eliminated completely in a simulation, thus we set $k=\theta=0$. Also the same exposure settings have to be used for the sensor in every test, therefore we have $\tau = const$ and set $ \tau = 1$ for simplicity. \cite{camAndDisplays, radiometricCCD,failureSemi,fridrich} suggest that the dark current is very weak with short exposure, which is necessary for applications in biometric systems to avoid motion blur. Under these considerations, a fairly simple model, considering only aging-relevant defects, remains:
 
 \begin{equation}
@@ -139,51 +130,43 @@ where the defect type in equ. \ref{equ:Stuck} is light-independent (thus referre
 
 \begin{equation}
 \begin{aligned}
-Y_{x,y} = \begin{cases}
-C_{x,y}  & \text{if $c_{x,y} \neq 0$}; \\
-I_{x,y} +D_{x,y}  & \text{otherwise}.\\
+Y({x,y}) = \begin{cases}
+C({x,y})  & \text{if $C({x,y}) \neq 0$}; \\
+I({x,y}) +D({x,y})  & \text{otherwise}.\\
 \end{cases} \\ \text{with} \quad Y,C,I,D \in {(\mathbb{Z}:[0;255])}^{w \times h}
 \label{equ:finalPixelModel}
 \end{aligned} 
 \end{equation}
 
-where $Y_{x,y}$-values are clipped at $0$ and $255$ respectively if interval borders are exceeded. This means they are able to saturate. 
+where $Y({x,y})$-values are clipped at $0$ and $255$ respectively if interval borders are exceeded. This means they are able to saturate. 
 
 \section{Simulated sensor aging}
 \label{virtualAging}
-For an ideal sensor, the defect matrices $C$ and $D$ are time-invariant zero matrices. For real sensors, pixel defects start to occur from a specific point in time $T_0$ with a constant rate. This can be modelled by a poisson process \cite{fridrich}. Hence the number of stuck and partially-stuck pixels, denoted as $n_{s}$ and $n_{ps}$ respectively, at $T_i$ can be calculated as
+For an ideal sensor, the defect matrices $C$ and $D$ are time-invariant zero matrices. For real sensors, pixel defects start to occur from a specific point in time $T_0$ with a constant rate. This can be modelled by a poisson process \cite{fridrich}. Therefore the number of stuck and partially-stuck pixels, denoted as $n_{s}$ and $n_{ps}$ respectively, at time $T$ can be calculated as
 
 \begin{eqnarray}
-   n_s(t)  & = & (T_i-T_0) \lambda_s \\
-  n_{ps}(t) & = &  (T_i-T_0) \lambda_{ps}
+   n_s(T)  & = & (T-T_0) \lambda_s \\
+  n_{ps}(T) & = &  (T-T_0) \lambda_{ps}
 \end{eqnarray}
 
-where $\lambda_s$ and $\lambda_{ps}$ are the rates at which the particular defect types occur. Due to defects being independent of each other, the locations of the defects among a 2D sensor array can be modelled by a uniform distribution. Thus the defect location $(x,y)$ can be obtained using random numbers $r$. We propose the following procedure to obtain the position $s_k \in {w \times h}$ of the $k$-th pixel defect:
-
-\begin{equation}
- s_k = (\myfloor{\frac{r}{w}}, (r \mod{w})) \quad \text{with} \quad r \in [0:w \cdot h]
- \label{equ:defectLocation}
-\end{equation}
-
-Depending on the $k$-th defect being a stuck or partially stuck pixel, the values of $C$ and $D$ (see equ. \ref{equ:finalPixelModel}) have to be set. We denote $a_s$ as the maximum amplitude of a stuck pixel and $a_{ps}$ the maximum amplitude of a partially stuck pixel. Let $r_a \in \mathbb{R}:[0;1]$ be a uniformly distributed random number. Then we either have
+where $\lambda_s$ and $\lambda_{ps}$ are the growth rates, at which the particular defect types occur. Due to defects being independent of each other, the locations of defects in a 2D sensor array can be modelled by a uniform distribution. Hence the position  $s_k \in {w \times h}$ of $k$-th defect is simulated with uniformly distributed random variables. Depending on the $k$-th defect being a stuck or partially stuck pixel, the values of $C$ and $D$ (see equ. \ref{equ:finalPixelModel}) have to be set. We denote $a_s$ as the maximum amplitude of a stuck pixel and $a_{ps}$ the maximum amplitude of a partially stuck pixel. Let $r_a \in \mathbb{R}:[0;1]$ be a uniformly distributed random number. Then we either have
 
 \begin{eqnarray}
-   C_{s_k}  & = & r_a  a_s \quad \text{for a stuck pixel at } s_k \text{ or} \label{equ:stucks} \\
-   D_{s_k} & = &  r_a a_{ps} \quad \text{for a partially-stuck pixel at } s_k \label{equ:partiallyStuck}
+   C({s_k})  & = & r_a  a_s \quad \text{for a stuck pixel at } s_k \text{ or} \label{equ:stucks} \\
+   D({s_k}) & = &  r_a a_{ps} \quad \text{for a partially-stuck pixel at } s_k \label{equ:partiallyStuck}
 \end{eqnarray}
 
-These definitions are used, according to the pixel model in equ. \ref{equ:finalPixelModel}, to add aging-related sensor defects to an existing image $Y_{T_0}$, which was captured at ${T_0}$. One might argue that $Y_{T_0}$ already contains pixel defects since the used sensor might bear defects at $T_0$ already. Since we are only interested in investigating changes over a period of time, it does not matter which time frame we observe. This means, already contained defects in $Y_{T_0}$ do not influence the outcome of the experiment because we get relative results only. Sensor defects corresponding to a sensor's physical condition at a specific time $T_i$ are embedded in the image $Y_{T_0}$. The resulting image $Y_{T_i}$, denoted as \emph{aged image}, captures the same scene as in $T_0$, but bears the impact of aging defects occured over time ${T_i} - {T_0}$. To investigate the behaviour of iris recognition algorithms, we compute a sequence of aged images $(Y_{T_i})_{i=1 \dots m}$. To do so, first a series of defect matrices, which represent the state of aging at a specific point in time $T_i$, is computed. We denote these sequences gfor sample points $T_0$ \dots $T_m$ as
+
+\subsection{Generation of virtually aged data}
+These definitions are used, according to the pixel model in equ. \ref{equ:finalPixelModel}, to add aging-related sensor defects to an existing image $Y_{T_0}$, which was captured at ${T_0}$. One might argue that $Y_{T_0}$ already contains pixel defects since the used sensor might bear defects at $T_0$ already. Since we are only interested in investigating changes over a period of time, it does not matter which time frame we observe. This means, already contained defects in $Y_{T_0}$ do not influence the outcome of the experiment because we get relative results only. Sensor defects corresponding to a sensor's physical condition at a specific time $T_i$ are added to the image $Y_{T_0}$. The resulting image $Y_{T_i}$, subsequently denoted as \emph{aged image}, captures the same scene as in $T_0$, but bears the impact of aging defects occured over time ${T_i} - {T_0}$. To investigate the behaviour of iris recognition algorithms, we compute a sequence of aged images $(Y_{T_i})_{i=1 \dots m}$. To do so, first a series of defect matrices, which represent the state of aging at a specific point in time $T_i$, is computed. We denote these sequences for sample points $T_0$ \dots $T_m$ as
 
 \begin{equation}
-\begin{aligned}
-(D_{T_i})_{i=0..m} \text{ and } (C_{T_i})_{i=0..m} \\ 
-\text{with} \quad C_{T_i}, D_{T_i} \in {(\mathbb{Z}:[0;255])}^{w \times h}
-\end{aligned}
+(D_{T_i})_{i=0..m} \text{ and } (C_{T_i})_{i=0..m}
 \end{equation}
 
 The following algorithm is proposed to compute the sequence of aged images $Y_{T_i}$ for sample points $T_0$ \dots $T_m$ from a source image $Y_{T_0}$:
 
-\vspace{5mm}
+\vspace{2mm}
 \begin{algorithmic}[1]
 
 \Procedure{AgedImageSequence}{$Y_{T_0}$}
@@ -196,20 +179,20 @@ The following algorithm is proposed to compute the sequence of aged images $Y_{T
 
   \For{$k=1 \dots \Delta n_s$}
     \State $r_a \gets$ random in $[0;1]$
-    \State $s_k \gets$ random in $w \times h$ (equ. \ref{equ:defectLocation})
+    \State $s_k \gets$ random in $w \times h$
     \State $C_{T_{i}}(s_k) \gets r_a \cdot a_s$ (equ. \ref{equ:stucks})
   \EndFor
   
   \For{$k=1 \dots \Delta n_{ps}$}
     \State $r_a \gets$ random in $[0;1]$ 
-    \State $s_k \gets$ random in $w \times h$ (equ. \ref{equ:defectLocation})
+    \State $s_k \gets$ random in $w \times h$
     \State $D_{T_i}({s_k}) \gets r_a \cdot a_{ps}$ (equ. \ref{equ:partiallyStuck})
   \EndFor
   
   
-  $Y_{T_{i_{x,y}}} = \begin{cases}
-  C_{i_{x,y}}  & \text{if $C_{i_{x,y}} \neq 0$}; \\
-  Y_{T_{0_{x,y}}} +D_{i_{x,y}}  & \text{otherwise}.
+  $Y_{T_{i}}(x,y) = \begin{cases}
+  C_{T_i}(x,y) \quad \text{if $C_{T_i}(x,y) \neq 0$}; \\
+  Y_{T_{0}}(x,y) +D_{T_i}(x,y)  \quad \text{otherwise}.
   \end{cases}$
   
 \EndFor
@@ -236,39 +219,38 @@ We denote $Y_0 \dots Y_K$ a sequence of $K$ images taken in a very short period 
 y_{0} = y_{1} = \dots = y_{K} \label{equ:conditionStuck}
 \end{equation}
 
-To find partially stuck pixels, we compute a pixel's mean $\bar{y}$ from the sequence of images:
+To find partially stuck pixels, we compute a pixel's mean $\bar{y}$ from the sequence of images and substitute the pixel values by the model in equ. \ref{equ:finalPixelModel}. Because the possibility of a specific pixel being stuck can be ruled out by equ. \ref{equ:conditionStuck}, $c$ is not considered here. Some modelling noise $\theta$ is added to cover inpredicatable and differing impacts on the image acquisition, as in equ. \ref{equ:modelWithNoise}.
 \begin{eqnarray}
 \bar{y} & = & \frac{1}{K}\sum\limits_{k=1}^{K}y_k \\
-\bar{y} & = & \frac{1}{K}\sum\limits_{k=1}^{K}(y_k+d+\theta_k) \label{equ:modelWithNoise} \\
-\bar{y} & = & d+\frac{1}{K}\sum\limits_{k=1}^{K}(y_k) = d + \mu \label{equ:modelWithD}
+\bar{y} & = & \frac{1}{K}\sum\limits_{k=1}^{K}(i_k+d+\theta_k) \label{equ:modelWithNoise}
 \end{eqnarray}
-Equ. \ref{equ:modelWithNoise} is obtained by using the pixel model in equ. \ref{equ:finalPixelModel} (without $c$, as shown before, stuck pixels can be ruled out already) and adding some modelling noise $\theta$. Since $d$ denotes a partially-stuck pixeland therefore contained in every one of the sequences images, it is independent of k. The mean of a uniformly distributed modelling noise $\theta$ cancels out for sufficiently large K. We get equ. \ref{equ:modelWithD}, were $\mu$ denotes the mean value over all pixel values $y_k$ in the sequence.
+The mean of a uniformly distributed modelling noise $\theta$ cancels out for sufficiently large K. We assume there are no pixel defects present, hence the offset $(d=0) \rightarrow d'$. In this case we can substitute $i_k = y_k$ and denote the pixel mean $\bar{y}$ as $\bar{y}'$. The partially-stuck defect matrix $d$, although set to zero, contributes to each pixel output in the same way, thus it is independent of $k$, shown in equ. \ref{equ:modelWithD}. Under the assumption of no pixel defects, the identity $\bar{y}' \equiv median(y,q)$ holds, if the pixel means $\bar{y}$ have mostly identical values in a local $q \times q$ neighbourhood. This is the case in dark calibration tests, but also if the pixel mean of image regions is computed, where mostly unified brightness and texture are present, i.e. regions showing skin. This is why other regions, e.g. the regions where the iris happens to be pictured, have to be masked out, as illustrated in fig. \ref{fig:correlated}. 
 
-The mean $\bar{y}$ at a certain location has the same value as if taken the median over several $\bar{y}_i$ in its local neighbourhood with distance $q$. This holds if the neighbouring pixels ${y_i}$ in a $q \times q$ neighbourhood had similar pixel values in the original images $Y_i$. Therefore we have the identity $med(y,q) = \bar{y}$, even if one (but less than half) of the $\bar{y}i$ in the neighbourhood is significantly different. Hence sparse pixel defects, which contribute to the mean, disappear when applying median filtering on the mean image's pixels $\bar{y}$ in a local neighbourhood. Considering only parts of the mean image $\bar{Y}$, where mostly unified brightness and texture is present in $Y_1 \dots Y_K$ we derive the partially-stuck pixel estimator $\hat{d}$ from equ. \ref{equ:modelWithD} as
-
+By the non-linear nature of median, sparse outliers within the $q \times q$ neighbourhood are filtered. Such outliers occur, if - contrary to the assumption - there is a pixel defect \cite{fridrich}. Hence with the median we have a method to compute the pixel mean $\bar{y}'$ disregarding the influence of pixel defects. We use this relation in equ. \ref{equ:d} to set $\bar{y}' \rightarrow median(y,q)$ and than have $d' \rightarrow \hat{d}$ being an estimator for the offset, which is added to the incident light $i_k$ in a sensors pixel output $y_k$.
 \begin{eqnarray}
-\hat{d} = \frac{1}{K}\sum\limits_{k=1}^{K}y_k - med(\bar{y},q \times q) \label{equ:d}
+\bar{y}' & = & d'+\frac{1}{K}\sum\limits_{k=1}^{K}(y_k) \label{equ:modelWithD} \\
+\hat{d} & = & \frac{1}{K}\sum\limits_{k=1}^{K}y_k - median(\bar{y},q) \label{equ:d}
 \end{eqnarray}
 
+Amongst the partially-stuck pixel information, also information about the PNRU is also contained in $\hat{d}$. Since PNRU is caused by imperfections in the manufacturing process, it is likely to be normally distributed which reflects in the logarithmic histogram of $\hat{d}$, as shown in fig. \ref{fig:defectMat}. The kernel size $q$ has to be chosen large enough to minimize the influence of PNRU on the median $med(\bar{y},q)$, which is the case if a normal distribution within the neighbourhood is observed.
 
-\begin{figure}
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{img/correlated.png}
   \caption{The mean image of $Y_1 \dots Y_k$ (left) has correlated data in the image's centre because of the iris usually being there. This (marked) region is not considered when detecting sensor defects. The histogram (right) of the uncorrelated top and bottom regions is indeed similar to uniform distribution}
   \label{fig:correlated}
 \end{figure}
 
-Amongst the partially stuck pixel information, also information about the PNRU is also contained in $\hat{D}$. Since PNRU is caused by imperfections in the manufacturing process, it is likely to be normally distributed which reflects in the logarithmic histogram of $\hat{D}$, as shown in fig. \ref{fig:defectMat}. The size $q$ has to be chosen large enough to minimize the influence of PNRU on the median $med(\bar{y},q)$, which is the case if a normal distribution within the neighbourhood is observed.
-
 \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{img/defectMatWithTau.png}
-  \caption{Matrix D (left, enhanced for visualisation) is calculated by equ. \ref{equ:d}. The logarithmic histogram (right) of the uncorrelated regions shows a normal distribution, which is due to PNRU. The decision threshold $\tau_{ps}$ is so that only outliers are declared as partially stuck pixels}
+  \caption{The estimated offset matrix $\hat{D}$ (left, enhanced for visualisation) is calculated by equ. \ref{equ:d}. The logarithmic histogram (right) of the uncorrelated regions shows a normal distribution, which is due to PNRU. The decision threshold $\tau_{ps}$ is chosen in a way that only outliers are declared as partially stuck pixels}
   \label{fig:defectMat}
 \end{figure}
 
 
-We declare a pixel to be partially stuck if $\hat{d}$ is an outlier and therefore higher sensivitiy is unlikely to correspond to PNRU. This is decied by checking for a certain threshold $\hat{d} > \tau_{ps}$. The decision threshold is chosen, i.e. manually, to just get approximately same amount of outliers in $T_1$ and $T_2$. We exploit the \emph{once defective, always defective}-property to guarantee correct results, even if $\tau_{ps}$ has been slightly off. We know that a sensor's partially stuck pixels from $T_1$ also have to be present in $T_2$. This is illustrated in fig. \ref{fig:defectPersistence}. The number of defects $n_{match}$, which are present at the same location $s_k$ in the images captured at $T_1$ and $T_2$ can be determined. Considering the number of defects $n_1$ in the image captured at $T_1$, the correction factor $\gamma$ of the algorithm can be calculated as
+We declare a pixel to be partially stuck if $\hat{d}$ is an outlier in respect to the normal distribution and therefore has much higher sensivitiy than expected from PNRU. This is decied by checking for a certain threshold $\hat{d} > \tau_{ps}$. The decision threshold is chosen, i.e. manually, to just get approximately same amount of outliers in $T_1$ and $T_2$. We exploit the \emph{once defective, always defective}-property to guarantee correct results, even if $\tau_{ps}$ has been slightly off. We know that a sensor's partially stuck pixels from $T_1$ also have to be present in $T_2$. This is illustrated in fig. \ref{fig:defectPersistence}. The number of defects $n_{match}$, which are present at the same location $s_k$ in the images captured at $T_1$ and $T_2$ can be determined. Considering the number of defects $n_1$ in the image captured at $T_1$, the correction factor $\gamma$ of the algorithm can be calculated as
 \begin{equation}
 \gamma = \frac{n_{match}}{n_1}
 \end{equation}
@@ -299,7 +281,7 @@ Assuming that for $T_1$ and $T_2$ the same error is made, the observed increase 
 
 To be able to reliably estimate the sensor defect's growth rate and amplitudes for the mentioned data sets it is essential to ensure that the image sets in 2009 and 2013 have been acquired using an identical iris sensor device (this is of particular interest since doubts on this issue emerged in the context of the CASIA V.4 datasets recently \cite{Debiasi14a}). 
 %Therefore we needed to verify that the \emph{Irispass-2009} and \emph{Irispass-2013} data sets have been acquired with the exactly same iris sensor device, as well as the \emph{H100-2009} and \emph{H100-2013} data sets. 
-For this purpose we employ digital image forensic \cite{farid-spm-09} techniques. Sensor fingerprints, a methodology classically used in digital image forensics, are based on a sensor’s photo response non uniformity (PRNU) \cite{12696519,journals/tifs/ChenFGL08} and can be used to prove sample data authenticity by identifying the source sensor uniquely. Even various sensors from the same make/brand and model can be distinguished.
+%For this purpose we employ digital image forensic \cite{farid-spm-09} techniques. Sensor fingerprints, a methodology classically used in digital image forensics, are based on a sensor’s photo response non uniformity (PRNU) \cite{12696519,journals/tifs/ChenFGL08} and can be used to prove sample data authenticity by identifying the source sensor uniquely. Even various sensors from the same make/brand and model can be distinguished.
 
 To prove that the sensor device used in 2013 is the same specific device as used in 2009 and vice versa, we adopted the sensor identification methodology of H\"oller and Uhl \cite{UhlH12}. 
 We assume that the images under investigation, namely the 2009 and 2013 data sets, are acquired with different sensor devices and derive from the results that this assumption is not correct (proof by contradiction).
@@ -354,7 +336,7 @@ The results in table \ref{table:prnu_fp_corr} show that the NCC scores for finge
 
 \vspace{-4mm}
 
-Since we proved the images were indeed acquired using the same sensor and show aging effects, we use the method in section \ref{hotPixelRate} to retrieve growth rate and amplitudes of pixel defects for the \emph{Irisguard H100 IRT}. By chosing a 9x9 median kernel and appropriate $\tau_{ps}$ as decision thresholds, $n_{ps}27$ and $n_{ps}=28$ candidates for partially-stuck pixels were found in 2009 and 2013 respectively (see fig. \ref{fig:defectPersistence}). Because there where $n_{match}=5$ matching pixels, the correction factor is set to $\gamma=0.185$. Using these values, an estimated growth rate $\lambda_{ps}=0.66594$ can be determined. The growth rates are measured in number of defects per Megapixel per year. The retrieved values (refer table \ref{table:parameters}) correspond with the findings of other researchers, refer \cite{defectDetection, leung}. Dudas suggests in \cite{inFieldDefects} that real stuck pixels are never detected in field, because they are easy to detect at fabrication time and get corrected or may correspond to partially stuck pixels with extremely high offset. However, we modelled actual stuck pixels at a moderate growth rate (refer table. \ref{table:tests}) to investigate what happens if stuck pixels should occur. Furthermore, we modelled other sensors with growth rates retrieved from literature and pushed the aging parameters to mutiples of the real values. To get the highest possible impact, the largest growth rates for the specific sensor were taken. A summary of all used parameters in this simulation is given in table \ref{table:parameters}.
+Since we proved the images were indeed acquired using the same sensor and show aging effects, we use the method in section \ref{hotPixelRate} to retrieve growth rate and amplitudes of pixel defects for the \emph{Irisguard H100 IRT}. Lacking the sensor settings information for images in the data set, we have to assume no in-field defect correction \cite{inFieldDefects} and exposure settings were constant for all acquisition processes. By chosing a 9x9 median kernel and appropriate $\tau_{ps}$ as decision thresholds, $n_{ps}27$ and $n_{ps}=28$ candidates for partially-stuck pixels were found in 2009 and 2013 respectively (see fig. \ref{fig:defectPersistence}). Because there where $n_{match}=5$ matching pixels, the correction factor is set to $\gamma=0.185$. Using these values, an estimated growth rate $\lambda_{ps}=0.66594$ can be determined. The growth rates are measured in number of defects per Megapixel per year. The retrieved values (refer table \ref{table:parameters}) correspond with the findings of other researchers, refer \cite{defectDetection, leung}. Dudas suggests in \cite{inFieldDefects} that real stuck pixels are never detected in field, because they are easy to detect at fabrication time and get corrected or may correspond to partially stuck pixels with extremely high offset. However, we modelled actual stuck pixels at a moderate growth rate (refer table. \ref{table:tests}) to investigate what happens if stuck pixels should occur. Furthermore, we modelled other sensors with growth rates retrieved from literature and pushed the aging parameters to mutiples of the real values. To get the highest possible impact, the largest growth rates for the specific sensor were taken. A summary of all used parameters in this simulation is given in table \ref{table:parameters}.
 
  % TODO: Proof of correctness by probability
 
@@ -380,13 +362,14 @@ Since we proved the images were indeed acquired using the same sensor and show a
     \caption{Simulation parameters. }
     \label{table:parameters}
   \end{center}
+  \vspace{-5mm}
 \end{table}
 
 \egroup
 
   Based on these parameters, a number of virtual sensors are defined in table \ref{table:tests}, where sensor A corresponds to the H100. They are designed in a way that all possible combinations of partially-stuck and stuck pixels are covered. Sensors F,G and H show amplitudes and growth rates which are very unlikely to be observed in practice, but should demonstrate the influence of heavy aging effects. 
  
- \begin{table}[hbt]  
+ \begin{table}[bt]  
   \begin{center}
 
   \begin{tabular}{c | c c c }
@@ -409,40 +392,40 @@ Since we proved the images were indeed acquired using the same sensor and show a
   \end{center}
  \end{table}
   
-  \vspace{-4mm}
-  For each of these sensor models, an aged data set based on the IITD database \cite{iitd} (TIFF, N=2240) over a time span of 96 years is calculated with a step width $\Delta t=8 \text{years}$. This is likely to cover sensor aging over a human being's entire lifetime. The impact of sensor aging is determined by evaluation of the Equal Error Rate EER (also known as Crossover Error Rate). In terms of this paper the EER is calculated by considering the left and right eye of a subject as seperate classes. By the structure of the database (using crossover evaluation), 8940 genuine and 5006400 impostor matches are the base for computing the EER.
+  Six implementations \cite{Ma, Monro, ko, cb, lg, rathgeb} of iris-signature algorithms provided by the USIT Framework v1.0.3 are tested for vulnerability to sensor aging. In the semgentation step, Weighted adaptive Hough and ellipsopolar transforms WAHET method \cite{wahet} is used. For each of the virtual sensor models in table \ref{table:tests}, an aged data set based on the I.I. of Technology Delhi database v1.0 (TIFF, N=2240) over a time span of 96 years (8 year steps) is calculated. The impact of sensor aging is determined by evaluation of the Equal Error Rate EER. In terms of this paper the EER is calculated by considering the left and right eye of a subject as seperate classes. By the structure of the database, 8940 genuine and 5006400 impostor matches are the base for computing the EER using crossover evaluation.
   
-  Sensor A, which is a model of a real iris scanner, has been tested with all six implementations iris-signature algorithms of the USIT Framework to evaluate each algorithm's vulnerability to sensor aging. For all other virtual sensors, the algorithms of Ma \emph{et al} \cite{Ma} and Monro \emph{et al} \cite{Monro} were used. The segmentation was carried out by Weighted adaptive Hough and ellipsopolar transforms WAHET \cite{wahet}. 
- 
  \section{Results}
  \label{results}
- For all six iris signature algorithms no tendency in accuracy change due to sensor aging is observed. This is concluded from investigating the EER on sensor A (refer fig. \ref{fig:sensor1}). There is, however, a significant variation in EER at the sample points for some algorithms. Thus defects caused by sensor aging indeed influence the retrieved iris signatures. Especially for the LogGabor-1D method  \cite{lg}, a high variation between sample points is observed. This indicates that this method is sensitive towards sensor aging. The algorithm of Ko \emph{et al} \cite{ko} and the context based method \cite{cb} tend to be robust.
+ Two algorithms of Rathgeb and Uhl (abbreviated \emph{cb} and \emph{cr} \cite{rathgeb}) and the algorithms of Ko \etal \cite{ko}, Monro \etal (\emph{dct} \cite{Monro}) Ma \etal(\emph{qsw} \cite{Ma}) and the LogGabor-1D method (\emph{lg} \cite{lg}) were tested with aged data sets generated with the sensor models proposed in table \ref{table:tests}.
  
- \begin{figure}[h]
+ Figure \ref{fig:sensor1} shows the developments of the EER as sensor A ages. For none of the six tested algorithms trend in the progress of the EER can be observed. This means, the effects of sensor aging do not decrease an iris recognition system's accuracy in general. There is, however, a significant variation in the EER for some of the algorithms observable. The methods \emph{cb} and \emph{ko} are robust against defects caused by sensor aging. While three of the other algorithms can be considered to be widely stable, the LogGabor-1D method is sensitive to aging-related defects. 
+ 
+  \begin{figure}[h]
   \centering
   \includegraphics[width=\linewidth]{img/sensor1.png}
-  \caption{EER using Sensor A and WAHET segmentation }
+  \caption{EER of six iris-signature algorithms using Sensor A. Note that EERs are high, because of the used WAHET-segmentation. Other segmentation methods might result in generally lower EER rates.}
   \label{fig:sensor1}
 \end{figure}
+
+This means, algorithms, i.e. LogGabor-1D, showing high EER variance in this experiment are not robust against peaky noise in the sensor output, which is i.e. caused by aging defects. This noise influences both stages of an iris recognition system, namely the segmentation and/or the iris signature. Since the impact on the segmentation step has not been explicitely investigated, it cannot be distinguished whether one of the tested iris-signature algorithms is sensitive to peaky noise in the segmented image, commonly denoted as iris texture, or to changes in the segmentation behaviour itself. Since the same segmentation was used for all tests, it is indeed possible to see from the results that systems using robust algorithms, such as \emph{cb} or \emph{ko}, tend to be more robust towards peaky noise caused by aging-related defects than others. This holds as long as systems with the same segmentation methods are used.
  
+  \begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{img/dct.png}
+  \includegraphics[width=\linewidth]{img/qsw.png}
+  \caption{Equal error rates of the algorithms of Monro \etal (top) and Ma \etal \cite{Ma} (bottom). EER for data sets corresponding to sensors A-H at sample times are plotted as unlabelled data points. The mean EER over all data sets is plotted as dashed line.}
+  \label{fig:allSensors}
+\end{figure}
  
- \subsection{Limitation of the results}
- \begin{itemize}
-  \item Only one sensor tested (probably not representative)
-  \item In-Camera fixing of sensor defects neglected (might influence development rate, but not so important, because also tested with multiples of the original rate)
-  \item Always same settings in camera?!
-  \item unsure whether noise reduction on in iris sensors
-  \item But proved in JLEUNG that was off... so these rates probably representative
-  \item segmentation or iris code?
- \end{itemize}
- 
+ When the same iris signature algorithm is used with data sets, which were created using the virtual sensor models A-H, one can investigate the general robustness of a specific algorithm. This is the case, because sensors with different relevant aging characteristics (growth rate, amplitude, defect-types) are taken into account in this experiment. Figure \ref{fig:allSensors} illustrates the average EER for the algorithms of Monro \etal and Ma \etal over data sets generated from all 8 sensor models. For each sample point in tame, 8 EER-points corresponding to one sensor each are plotted. This visualizes the variance of the EER between data sets, hence the impact of distribution and strength of aging related defects. The algorithms of Monro \etal (\emph{dct}) and Ma \etal (\emph{qsw}) were chosen as an illustrative example, because a similar variance is indicated by their graphs in figure \ref{fig:sensor1}. The distribution of EER-samples in the plot in figure \ref{fig:allSensors} reveals that the algorithm of Monro \etal shows much lower variance in general than the one of Ma \etal. This contradicts the initial observation from \ref{fig:sensor1}, which means it is crucial to run multiple simulations with different sensor models to give a statement on the general robustness towards sensor aging.
  
  \section{Conclusion}
  \label{conclusion}
- We used a simulation to embed aging-related defects onto a sensors output. Practical relevance of the simulation has been established by retrieving simulation parameters from data, which has been captured by an iris scanner in a 4 years' difference. To retrieve these parameters, a method was proposed in section \ref{hotPixelRate}. By using these parameters and similar ones from related work, an experiment has been carried out. In this experiment the impact of sensor-aging on the accuracy of iris recognition systems was investigated.
+ We used a simulation to add aging-related defects to a data set of already acquired sensors outputs, namely images. Practical relevance has been established by retrieving simulation parameters from data, which has been captured by an iris scanner in a 4 years' difference. To retrieve these parameters, a method was proposed in section \ref{hotPixelRate}. Using them and similar ones from related work, an experiment has been carried out, as discussed in section \ref{testing}. From the results we conclude on the impact of sensor-aging on iris recognition systems.
  
- Interpreting the results, we can say that the LogGabor-1D method is vulnerable to aging-related defects. The algorithm's of Ma et al, Monro at al and Rathgeb and Uhl's DCT based algorithm are rather stable, whereas Rathgeb and Uhl's context based algorithm and the algorithm of Ko at al is considered to be robust. However, no tendency to a overall decrease in recognition accuracy can be determined. 
- In conclusion, this paper shows that some algorithms are more vulnerable to age-related defects than others, although no general tendency in accuracy can be observed. 
+The results indicate that sensor aging itself does not cause a general decrease in a iris recognition system's accuracy, but peaky noise, i.e. caused by sensor aging related defects, impacts on the EER and therefore on a system's accuracy in a significant way. This means an iris recognition system's accuracy depends on the current physical condition of the sensor - which changes over time. On the one hand there is neither a general increase or decrease in an iris recognition system's accuracy observed, which can be related to sensor-aging. On the other hand, we showed that defects related to sensor aging influence the accuracy of an iris recognition system in a transitory way. The results of experiments aiming to investigate iris texture aging, wich were obtained by evaluation of the change in a system's accuracy (e.g. the EER), are not reliably for this reason, since the different physical states of the sensor at data acquisition might have significant impact on the results.  
+ 
+ % TODO: Claim that this might void the results of all that claim that a decrease in detection accuracy is true when a human ages ==> Sensor might be in a transitory bad state.
  
 
  %\section{Future work}

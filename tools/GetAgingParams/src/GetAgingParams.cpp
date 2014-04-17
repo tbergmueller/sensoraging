@@ -19,7 +19,7 @@ using namespace cv;
 
 
 #define NR_OF_FILES		4640
-#define MEDIAN_KERNEL_SIZE	7
+#define MEDIAN_KERNEL_SIZE	9
 
 
 cv::Mat calcPixelMean(const vector<cv::Mat>& inputImages)
@@ -213,8 +213,8 @@ int global_areaCorrelated = 0;
 void optimizeCorrectness(const Mat& defects09, const Mat& defects13, Mat& refinedLocations)
 {
 	// Thres
-	int thres2009 = 217;
-	int thres2013 = 206;
+	int thres2009 = 230;
+	int thres2013 = 227;
 
 	Mat w09, w13;
 
@@ -307,8 +307,11 @@ void processInputs(vector<Mat>& inputs, string file_prefix, Mat& o_defects, Mat&
 
 	rectangle(d,Point(0,0), Point(d.cols-1, 2),Scalar::all(0),CV_FILLED);
 
+	// additional growing of internal region
+	int deltaW = 20;
+	int deltaH = 55;
 
-	Rect middle(100,130,430,208);
+	Rect middle(0,130-2*deltaH,d.cols,250+2*deltaH);
 	rectangle(d,middle,Scalar::all(0),CV_FILLED);
 
 	global_areaCorrelated = middle.width*middle.height+2*d.cols;
@@ -321,7 +324,7 @@ void processInputs(vector<Mat>& inputs, string file_prefix, Mat& o_defects, Mat&
 	writeImg(file_prefix, "defects_uncorrelated",d);
 
 	// Do classification by thresholding, FIXME: Hardcoded parameters
-	threshold(d,d,190,255,CV_THRESH_BINARY);
+	threshold(d,d,230,255,CV_THRESH_BINARY);
 
 	writeImg(file_prefix, "defects_classified",d);
 

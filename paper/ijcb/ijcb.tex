@@ -52,7 +52,7 @@
 \author{Thomas Bergm{\"u}ller\wu\wg, Luca Debiasi\wu and Andreas Uhl\wu\\
 \wu University of Salzburg, \wg Authentic Vision\\
 Austria\\
-{\tt\small thomas.bergmueller@authenticvision.com, \tt\small \{ldebiasi,uhl\}@cosy.sbg.ac.at}
+{\tt\small tb@authenticvision.com, \tt\small \{ldebiasi,uhl\}@cosy.sbg.ac.at}
 \and
 Zhenan Sun\\
 National Lab for Pattern Recognition CASIA\\
@@ -395,7 +395,7 @@ Since we proved the images were indeed acquired using the same sensor and show a
   
   Six implementations 
   %\cite{Ma,Monro,ko,rathgeb} 
-  of iris-signature algorithms provided by the USIT Framework v1.0.3 (as available at \url{http://wavelab.at/sources/} \cite{rathgeb}) are tested for vulnerability to sensor ageing. For segmentation included methods contrast-adjusted Hough Transform (CAHT) and Weighted Adaptive Hough and Ellipsopolar Transform (WAHET) are used. For each of the virtual sensor models in table \ref{table:tests}, an aged data set based on the IITD iris database v1.0 (TIFF, N=2240) \cite{IITD} over a time span of 96 years (8 year steps) is calculated. The impact of sensor ageing is determined by evaluation of the Equal Error Rate (EER). In terms of this paper the EER is calculated by considering the left and right eye as seperate classes. By the structure of the database, 8940 genuine and 5006400 impostor matches are used for computing the EER with crossover evaluation.
+  of iris-signature algorithms provided by the USIT Framework v1.0.3 (as available at \url{http://wavelab.at/sources/} \cite{rathgeb}) are tested for vulnerability to sensor ageing. For segmentation contrast-adjusted Hough Transform (CAHT) and Weighted Adaptive Hough and Ellipsopolar Transform (WAHET) are used. For each of the virtual sensor models in table \ref{table:tests}, an aged data set based on the IITD iris database v1.0 (TIFF, N=2240) \cite{IITD} over a time span of 96 years (8 year steps) is calculated. The impact of sensor ageing is determined by evaluation of the Equal Error Rate (EER). In terms of this paper the EER is calculated by considering the left and right eye as seperate classes. By the structure of the database, 8940 genuine and 5006400 impostor matches are used for computing the EER with crossover evaluation.
   
  \section{Results}
  \label{results}
@@ -409,9 +409,9 @@ Monro \etal (\emph{dct}),
  %\cite{Ma}
   and the LogGabor-1D method by L. Masek (\emph{lg}) as (re-)implemented in USIT were tested with aged data sets generated with the sensor models proposed in table \ref{table:tests}.
  
- Figure \ref{fig:sensor1} shows the developments of the EER as sensor A ages. For both used segmentation method none of the six tested algorithms shows a significant trend in the progress of the EER. This means, the effects of sensor ageing do not decrease an iris recognition system's accuracy in general. There is, however, a significant variation in the EER for some of the algorithms. 
+ Figure \ref{fig:sensor1} shows the developments of the EER as sensor A ages. For both used segmentation methods no significant trend in the progress of the EER is observeable for all six tested algorithms. This means, the effects of sensor ageing do not decrease an iris recognition system's accuracy in general. There is, however, a significant variation in the EER for some of the algorithms. 
   
-For both segmentation methods, the methods \emph{cb} and \emph{ko} are robust against defects caused by sensor ageing, \emph{qsw} is considered to be widely stable. Rathgeb and Uhl's \emph{cr} algorithm shows significant variance for both segmentation methods. Interestingly, while the LogGabor-1D is robust with the CAHT-segmentation, it shows the highest variation with the WAHET-segmentation. Similar behaviour is observed for \emph{dct} in the other direction.
+For both segmentation methods, the algorithms \emph{cb} and \emph{ko} are robust against defects caused by sensor ageing, \emph{qsw} is considered to be widely stable and Rathgeb and Uhl's \emph{cr} algorithm shows significant variance. Interestingly, while the LogGabor-1D is robust with the CAHT segmentation, it shows the highest variation with the WAHET segmentation. Similar behaviour can be observed for \emph{dct}, but in the other direction.
 
  
   \begin{figure}
@@ -419,11 +419,11 @@ For both segmentation methods, the methods \emph{cb} and \emph{ko} are robust ag
   \includegraphics[width=\linewidth]{img/sensor1_caht.png}
   \includegraphics[width=\linewidth]{img/sensor1_wahet.png}
   \includegraphics[width=0.8\linewidth]{img/legend_sensor1.png}
-  \caption{EER of six iris-signature algorithms using sensor model A. The segmentation step was carried out by using CAHT (top) and WAHET (bottom) respectively.}
+  \caption{EER of six iris-signature algorithms using sensor model A. The segmentation was done by using CAHT (top) and WAHET (bottom) respectively.}
   \label{fig:sensor1}
 \end{figure}
 
-This means that algorithms like showing high EER variance in general, i.e. Rathgeb and Uhl's \emph{cr}, are not robust towards spiky noise as caused by sensor ageing in the segmented image, commonly denoted as iris texture. Other algorithms, like LogGabor-1D, are influenced in a severe manner if the segmentation changes due to sensor ageing defects. Other algorithms, like \emph{cb} and \emph{ko} are robust for both tested segmentation methods, therefore robust against changing segmentation and spiky noise contained in the iris texture itself.
+From that one can conclude that algorithms like showing high EER variance in general, i.e. Rathgeb and Uhl's \emph{cr}, are sensible to by spiky noise (as caused by sensor ageing) in the segmented image, commonly denoted as iris texture. Other algorithms, like LogGabor-1D, are influenced in a severe manner if the segmentation changes due to sensor ageing defects. Algorithms like \emph{cb} and \emph{ko}, which do not show significant variance in any case, are robust against changing segmentation and spiky noise contained in the iris texture itself.
 
  
   \begin{figure}
@@ -437,7 +437,7 @@ This means that algorithms like showing high EER variance in general, i.e. Rathg
   \label{fig:allSensors}
 \end{figure}
  
- When the same iris feature extraction algorithm is used with data sets created using the virtual sensor models A-H, one can investigate the general robustness of a specific algorithm. This is because sensors with different ageing characteristics are taken into account in this experiment. Figure \ref{fig:allSensors} illustrates the average EER for the algorithms of L.Masek and Ko \etal with CAHT segmentation over data sets generated from all sensor models. For each sample point in time, EER-points corresponding to the sensor models are plotted. This visualizes the variance of the EER between data sets, hence the impact of distribution and strength of ageing related defects. The algorithms of L.Masek (\emph{lg}) and Ko \etal (\emph{ko}) were chosen as an illustrative example, because they show the highest robustness in figure \ref{fig:sensor1} for CAHT segmentation. The distribution of EER-samples in the plot in figure \ref{fig:allSensors} reveals that the algorithm of Ko \etal shows much lower variance than the one of L.Masek. This contradicts the similarity suggested from the initial observation in \ref{fig:sensor1}. Hence it is crucial to run multiple simulations with different sensor models to give a statement on an algorithm's behaviour as the sensor ages. Interestingly, trends are observeable for sensors G and H. While Ko \etal's algorithm shows an trend to rising EER, a decrease is observed for L.Masek's. However, both sensor models have pushed growth rates and amplitudes. For sensors A-C, which are realistic models, no such trend is observable.
+ When the same iris feature extraction algorithm is used with data sets created using the virtual sensor models A-H, one can investigate the general robustness of a specific algorithm. This is because sensors with different ageing characteristics are taken into account in this experiment. Figure \ref{fig:allSensors} illustrates the average EER for the algorithms of L.Masek and Ko \etal with CAHT segmentation over data sets generated from all sensor models. For each sample point in time, EER-points corresponding to the sensor models are plotted. This visualizes the variance of the EER between data sets, hence the impact of distribution and strength of ageing related defects. The algorithms of L.Masek (\emph{lg}) and Ko \etal (\emph{ko}) were chosen as an illustrative example, because they show the smallest variance in figure \ref{fig:sensor1} for CAHT segmentation and could be considered to be robust. The distribution of EER-samples in the plot in figure \ref{fig:allSensors} reveals that the data of the algorithm of Ko \etal shows much lower variance than the one of L.Masek. This contradicts the similarity suggested from the initial observation in \ref{fig:sensor1}. Hence it is crucial to run multiple simulations with different sensor models to give a statement on an algorithm's behaviour as the sensor ages. Interestingly, trends are observeable for sensors G and H. While Ko \etal's algorithm tends to a rising EER, a decrease is observed for L.Masek's. However, the sensor models G and H have pushed growth rates and amplitudes. For sensors A-C, which are realistic models, no such trend is observable.
  
  \section{Conclusion}
  \label{conclusion}

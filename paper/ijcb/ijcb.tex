@@ -24,6 +24,11 @@
 
 \providecommand{\etal}[0]{\textit{et al.} }
 
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\def\sharedaffiliation{\end{tabular}\newline\begin{tabular}{c}}
+
+\def\wu{\superscript{*}}
+\def\wg{\superscript{\dag}}
 
 % Include other packages here, before hyperref.
 
@@ -32,7 +37,7 @@
 % run, let it finish, and you should be clear).
 %\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
 
-%\ijcbfinalcopy % *** Uncomment this line for the final submission
+\ijcbfinalcopy % *** Uncomment this line for the final submission
 
 \def\ijcbPaperID{****} % *** Enter the IJCB Paper ID here
 \def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
@@ -44,15 +49,10 @@
 %%%%%%%%% TITLE
 \title{Impact of sensor ageing on iris recognition}
 
-\author{Thomas Bergm{\"u}ller, Luca Debiasi and Andreas Uhl\\
-University of Salzburg\\
+\author{Thomas Bergm{\"u}ller\wu\wg, Luca Debiasi\wu and Andreas Uhl\wu\\
+\wu University of Salzburg, \wg Authentic Vision\\
 Austria\\
-{\tt\small \{ldebiasi,uhl\}@cosy.sbg.ac.at}
-\and
-Thomas Bergm{\"u}ller \\
-Authentic Vision GmbH\\
-Austria\\
-{\tt\small thomas.bergmueller@authenticvision.com}
+{\tt\small thomas.bergmueller@authenticvision.com, \tt\small \{ldebiasi,uhl\}@cosy.sbg.ac.at}
 \and
 Zhenan Sun\\
 National Lab for Pattern Recognition CASIA\\
@@ -75,7 +75,7 @@ China\\
 
 \section{Introduction}
 % TODO probably start with a quote
-The ageing process starts immediately after being given birth. At first, ageing's aspects are considered to be rather positive. One grows up, gets stronger and learns new things. At a certain point, ageing starts to reveal several drawbacks. The skin gets wrinkled, joints and bones start to ache and our vision degenerates. In either case, ageing changes parts of our body. Although human beings change, others are still able to recognize people they knew before, even when they haven't met in a long time their appearance changed significantly.
+%The ageing process starts immediately after being given birth. At first, ageing's aspects are considered to be rather positive. One grows up, gets stronger and learns new things. At a certain point, ageing starts to reveal several drawbacks. The skin gets wrinkled, joints and bones start to ache and our vision degenerates. In either case, ageing changes parts of our body. Although human beings change, others are still able to recognize people they knew before, even when they haven't met in a long time their appearance changed significantly.
 
 Biometric systems aim to identify human beings by analysing their biometric samples, i.e. face, fingerprints or iris \cite{rathgeb}. These systems operate in two steps. In the enrollment process, a subject's biometric samples are registered for the first time and stored in a database. Later, in the authentication procedure, another sample is taken and compared to the one stored in the database to verify a subject's identity. Since there may be years or decades between enrollment and authentication, one strives to use biometric samples which are stable over time. The iris has been assumed to be stable, although it is currently topic of intensive discussion if and which iris-related information eventually changes as a human being ages. Some researchers claim that iris-related information is stable or relatively stable \cite{daugmanNoChange,BGrother13a}, while others observe significant changes over time \cite{rankinChange, rankinChangeResponse, fenkerIrisAging, czajkaTemplateAging, fairhurstNonstability}. Researchers mostly conclude these age-dependent changes in iris texture by observing changes in a system's iris-recognition rate. It is not clear, if observed changes in an algorithms' behaviour are caused by the ageing of the tested subject, which is commonly assumed, ageing of the recognition system itself or if this is caused by other unspecified factors.
 
@@ -395,7 +395,7 @@ Since we proved the images were indeed acquired using the same sensor and show a
   
   Six implementations 
   %\cite{Ma,Monro,ko,rathgeb} 
-  of iris-signature algorithms provided by the USIT Framework v1.0.3 (as available at \url{http://wavelab.at/sources/} \cite{rathgeb}) are tested for vulnerability to sensor ageing. In the semgentation step, weighted adaptive Hough and ellipsopolar transform (WAHET \cite{wahet}) is used. For each of the virtual sensor models in table \ref{table:tests}, an aged data set based on the IITD iris database v1.0 (TIFF, N=2240) \cite{IITD} over a time span of 96 years (8 year steps) is calculated. The impact of sensor ageing is determined by evaluation of the Equal Error Rate (EER). In terms of this paper the EER is calculated by considering the left and right eye as seperate classes. By the structure of the database, 8940 genuine and 5006400 impostor matches are used for computing the EER with crossover evaluation.
+  of iris-signature algorithms provided by the USIT Framework v1.0.3 (as available at \url{http://wavelab.at/sources/} \cite{rathgeb}) are tested for vulnerability to sensor ageing. For segmentation included methods contrast-adjusted Hough Transform (CAHT) and Weighted Adaptive Hough and Ellipsopolar Transform (WAHET) are used. For each of the virtual sensor models in table \ref{table:tests}, an aged data set based on the IITD iris database v1.0 (TIFF, N=2240) \cite{IITD} over a time span of 96 years (8 year steps) is calculated. The impact of sensor ageing is determined by evaluation of the Equal Error Rate (EER). In terms of this paper the EER is calculated by considering the left and right eye as seperate classes. By the structure of the database, 8940 genuine and 5006400 impostor matches are used for computing the EER with crossover evaluation.
   
  \section{Results}
  \label{results}
@@ -409,34 +409,41 @@ Monro \etal (\emph{dct}),
  %\cite{Ma}
   and the LogGabor-1D method by L. Masek (\emph{lg}) as (re-)implemented in USIT were tested with aged data sets generated with the sensor models proposed in table \ref{table:tests}.
  
- Figure \ref{fig:sensor1} shows the developments of the EER as sensor A ages. For none of the six tested algorithms a trend in the progress of the EER can be observed. This means, the effects of sensor ageing do not decrease an iris recognition system's accuracy in general. There is, however, a significant variation in the EER for some of the algorithms. The methods \emph{cb} and \emph{ko} are robust against defects caused by sensor ageing. While three of the other algorithms are considered to be widely stable, the LogGabor-1D is sensitive to ageing-related defects. 
+ Figure \ref{fig:sensor1} shows the developments of the EER as sensor A ages. For both used segmentation method none of the six tested algorithms shows a significant trend in the progress of the EER. This means, the effects of sensor ageing do not decrease an iris recognition system's accuracy in general. There is, however, a significant variation in the EER for some of the algorithms. 
+  
+For both segmentation methods, the methods \emph{cb} and \emph{ko} are robust against defects caused by sensor ageing, \emph{qsw} is considered to be widely stable. Rathgeb and Uhl's \emph{cr} algorithm shows significant variance for both segmentation methods. Interestingly, while the LogGabor-1D is robust with the CAHT-segmentation, it shows the highest variation with the WAHET-segmentation. Similar behaviour is observed for \emph{dct} in the other direction.
+
  
   \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{img/sensor1.png}
-  \caption{EER of six iris-signature algorithms using Sensor A. Note that EERs are high, because of the used WAHET-segmentation. Other segmentation methods might result in generally lower EER rates.}
+  \includegraphics[width=\linewidth]{img/sensor1_caht.png}
+  \includegraphics[width=\linewidth]{img/sensor1_wahet.png}
+  \includegraphics[width=0.8\linewidth]{img/legend_sensor1.png}
+  \caption{EER of six iris-signature algorithms using sensor model A. The segmentation step was carried out by using CAHT (top) and WAHET (bottom) respectively.}
   \label{fig:sensor1}
 \end{figure}
 
-This means that some algorithms, i.e. LogGabor-1D in this case, showing high EER variance are not robust towards spiky noise in the sensor output, which is often caused by ageing defects. This noise influences both stages of an iris recognition system, namely the segmentation and/or the generation of the iris code / template. Since the impact on the segmentation step has not been explicitely investigated, it cannot be distinguished whether one of the tested iris-feature extraction algorithms is sensitive to spiky noise in the segmented image, commonly denoted as iris texture, or to changes in the segmentation behaviour itself. Since the same segmentation was used for all tests, it is indeed possible to see from the results that systems using robust algorithms, such as \emph{cb} or \emph{ko}, tend to be more robust towards spiky noise caused by ageing-related defects than others. This holds as long as systems with the same segmentation methods are used.
+This means that algorithms like showing high EER variance in general, i.e. Rathgeb and Uhl's \emph{cr}, are not robust towards spiky noise as caused by sensor ageing in the segmented image, commonly denoted as iris texture. Other algorithms, like LogGabor-1D, are influenced in a severe manner if the segmentation changes due to sensor ageing defects. Other algorithms, like \emph{cb} and \emph{ko} are robust for both tested segmentation methods, therefore robust against changing segmentation and spiky noise contained in the iris texture itself.
+
  
   \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{img/dct.png}
-  \includegraphics[width=\linewidth]{img/qsw.png}
+  \includegraphics[width=\linewidth]{img/lg_caht.png}
+  \includegraphics[width=\linewidth]{img/ko_caht.png}
   \includegraphics[width=\linewidth]{img/legend.png}
+  %\includegraphics[width=\linewidth]{img/caht_allSensors.png}
   %\caption{Equal error rates of the algorithms of Monro \etal (top) and Ma \etal \cite{Ma} (bottom). EER for data sets corresponding to sensors A-H at sample times are plotted as unlabelled data points. The mean EER over all data sets is plotted as dashed line.}
-  \caption{Equal error rates of the algorithms of Monro \etal (top) and Ma \etal (bottom) for aged data sets corresponding to sensors A-H. The mean EER over all data sets is plotted as dashed line.}
+  \caption{Equal error rates of the algorithms of L.Masek (top) and Ko \etal (bottom) with CAHT-segmentation for aged data sets corresponding to sensors A-H. The mean EER over all data sets is plotted as dashed line.}
   \label{fig:allSensors}
 \end{figure}
  
- When the same iris feature extraction algorithm is used with data sets created using the virtual sensor models A-H, one can investigate the general robustness of a specific algorithm. This is the case, because sensors with different ageing characteristics (growth rate, amplitude, defect-types) are taken into account in this experiment. Figure \ref{fig:allSensors} illustrates the average EER for the algorithms of Monro \etal and Ma \etal over data sets generated from all sensor models. For each sample point in time, EER-points corresponding to the sensor models are plotted. This visualizes the variance of the EER between data sets, hence the impact of distribution and strength of ageing related defects. The algorithms of Monro \etal (\emph{dct}) and Ma \etal (\emph{qsw}) were chosen as an illustrative example, because a similar variance is indicated by their graphs in figure \ref{fig:sensor1}. The distribution of EER-samples in the plot in figure \ref{fig:allSensors} reveals that the algorithm of Monro \etal shows much lower variance in general than the one of Ma \etal. This contradicts the initial observation from \ref{fig:sensor1}, which means it is crucial to run multiple simulations with different sensor models to give a statement on the general robustness towards sensor ageing. Interestingly, Sensor E, which has stuck pixels only, tends have the highest impact, whereas this would have been expected for sensor H, which has the strongest aging characteristics. However, both sensor models have pushed growth rates and amplitudes. For sensors A-C, which are realistic models, no such trend is observable.
+ When the same iris feature extraction algorithm is used with data sets created using the virtual sensor models A-H, one can investigate the general robustness of a specific algorithm. This is because sensors with different ageing characteristics are taken into account in this experiment. Figure \ref{fig:allSensors} illustrates the average EER for the algorithms of L.Masek and Ko \etal with CAHT segmentation over data sets generated from all sensor models. For each sample point in time, EER-points corresponding to the sensor models are plotted. This visualizes the variance of the EER between data sets, hence the impact of distribution and strength of ageing related defects. The algorithms of L.Masek (\emph{lg}) and Ko \etal (\emph{ko}) were chosen as an illustrative example, because they show the highest robustness in figure \ref{fig:sensor1} for CAHT segmentation. The distribution of EER-samples in the plot in figure \ref{fig:allSensors} reveals that the algorithm of Ko \etal shows much lower variance than the one of L.Masek. This contradicts the similarity suggested from the initial observation in \ref{fig:sensor1}. Hence it is crucial to run multiple simulations with different sensor models to give a statement on an algorithm's behaviour as the sensor ages. Interestingly, trends are observeable for sensors G and H. While Ko \etal's algorithm shows an trend to rising EER, a decrease is observed for L.Masek's. However, both sensor models have pushed growth rates and amplitudes. For sensors A-C, which are realistic models, no such trend is observable.
  
  \section{Conclusion}
  \label{conclusion}
 % We used a simulation to add ageing-related defects to a data set of already acquired sensors outputs, namely images. Practical relevance has been established by retrieving simulation parameters from data, which has been captured by an iris scanner in a 4 years' difference. To retrieve these parameters, a method was proposed in section \ref{hotPixelRate}. Using them and similar ones from related work, an experiment has been carried out, as discussed in section \ref{testing}. From the results we conclude on the impact of sensor-ageing on iris recognition systems.
  
-The results indicate that sensor ageing influences the accuracy of iris recognition systems. Although for practical applications no general decrease in the recognition rate was observed, there is, however, a potentially significant sensitiveness to spiky noise, i.e. caused by sensor ageing. This means an iris recognition system's accuracy depends on the current physical condition of the sensor - which changes over time. We showed that defects related to sensor ageing affect the recognition rate of an iris recognition system in a transitory way. For this reason, the results of experiments aiming to investigate iris texture ageing, which were obtained by evaluation of the change in a system's accuracy (e.g. the EER), can not be considered entirely reliable, since the different physical states of the sensor at data acquisition might have significant impact on the results.  
+The results indicate that sensor ageing influences the accuracy of iris recognition systems. Although for practical applications no general tendency in the recognition rate was observed, there is, however, a potentially significant sensitiveness to spiky noise, i.e. caused by sensor ageing. This means an iris recognition system's accuracy depends on the current physical condition of the sensor - which changes over time. We showed that defects related to sensor ageing affect the recognition rate of an iris recognition system in a transitory way. For this reason, the results of experiments aiming to investigate iris texture ageing, which were obtained by evaluation of the change in a system's accuracy (e.g. the EER), can not be considered entirely reliable, since the different physical states of the sensor at data acquisition might have significant impact on the results.  
  
  % TODO: Claim that this might void the results of all that claim that a decrease in detection accuracy is true when a human ages ==> Sensor might be in a transitory bad state.
  
